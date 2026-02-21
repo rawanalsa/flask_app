@@ -6,12 +6,12 @@ import os
 
 #my app setup
 app = Flask(__name__)
-Scss(app)
+os.makedirs(app.instance_path, exist_ok=True)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mydatabase.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(app.instance_path, "mydatabase.db")
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
 db = SQLAlchemy(app)
-
 # create a model for the database (row of data)
 class MyTask(db.Model):
     id = db.Column(db.Integer, primary_key=True)
