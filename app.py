@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, request
 from flask_scss import Scss 
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import os
 
 #my app setup
 app = Flask(__name__)
@@ -73,4 +74,5 @@ def update(id:int):
 
 # runner and debugger 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
